@@ -1,6 +1,6 @@
 🖼️ Repository Catalog
 
-This repository serves as the central catalog for all deployed web applications within the DapaLMS1 organization. Its primary function is to automatically generate and store high-quality, up-to-date visual previews (thumbnails) for every single application hosted via GitHub Pages.
+This repository serves as the central catalog for all deployed web applications within the accounts-eles organization. Its primary function is to automatically generate and store high-quality, up-to-date visual previews (thumbnails) for every single application hosted via GitHub Pages.
 
 This ensures a dynamic and visual showcase of all active projects, making it easier to see what each repository contains without having to visit the live site.
 
