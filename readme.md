@@ -1,4 +1,4 @@
-# Dynamic GitHub Repository Catalog
+# Dynamic GitHub Repository Catalog 
 
 A single-file HTML application that fetches and displays a GitHub user's public repositories via the GitHub REST API. It provides live search, topic filtering, card selection, bulk file downloading, and a print-to-PDF catalog view — all with no build tools or dependencies beyond a CDN-loaded Tailwind CSS.
 
