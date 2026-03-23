@@ -4,7 +4,7 @@ const path = require('path');
 // This script requires Node.js v18+ for native fetch support
 
 // --- Configuration ---
-// Note: We use the organization name here, which is accounts-eles.
+// Note: We use the organization name here, which is accounts-eles. 
 const TARGET_ORG = 'accounts-eles';
 // FIXED: Changed the base URL to point to the live deployed GitHub Pages URL.
 // GitHub Pages URLs are case-insensitive, but typically lowercased (accounts-eles.github.io).
