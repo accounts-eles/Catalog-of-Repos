@@ -24,7 +24,7 @@ Two constants at the top of the `<script>` block control the app's behaviour:
 | Constant | Default | Purpose |
 |---|---|---|
 | `HARDCODED_USERNAME` | `accounts-eles` | The GitHub username whose repos are fetched |
-| `EXCLUDED_REPO_NAME` | `Catalog_of_Repos` | A single repo name to suppress from the listing |
+| `EXCLUDED_REPO_NAME` | `Catalog-of-Repos` | A single repo name to suppress from the listing |
 
 Change these values to point the catalog at any GitHub account.
 
