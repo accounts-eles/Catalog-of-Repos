@@ -7,9 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  generate-previews:
+  preview-pages:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -22,7 +21,29 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run preview generator
+      - name: Run preview generator (Pages mode)
         env:
           ORG_PAT_TOKEN: ${{ secrets.ORG_PAT_TOKEN }}
+          RUN_MODE: pages
+        run: node generate_preview_script.js
+
+  preview-drive:
+    runs-on: ubuntu-latest
+    needs: preview-pages
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run preview generator (Local mode)
+        env:
+          ORG_PAT_TOKEN: ${{ secrets.ORG_PAT_TOKEN }}
+          RUN_MODE: local
         run: node generate_preview_script.js
