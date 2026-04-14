@@ -9,7 +9,7 @@
     <!-- Configure Tailwind with the new brand color scheme -->
     <script>
         tailwind.config = {
-            theme: {
+            theme: nail
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -526,7 +526,7 @@ async function fetchAndDisplayRepos(username) {
             
             const targetUrl = `https://accounts-eles.github.io/${repo.name}/`;
             const placeholderUrl = `https://placehold.co/600x300/1f2a52/ffffff?text=${repo.name}`;
-            const thumbnailUrl = `./previews/${repo.name}.png`;
+            const thumbnailUrl = `https://raw.githubusercontent.com/accounts-eles/${repo.name}/main/preview.png`;
 
             const topicsHtml = (repo.topics || []).map(t => 
                 `<span class="text-[10px] font-bold text-brand-teal border border-brand-teal px-2 py-0.5 rounded uppercase mr-1.5 mb-1.5">${t}</span>`
