@@ -1,15 +1,10 @@
 name: Generate Repository Previews
 
 on:
-  # Runs automatically whenever code is pushed to the main branch
   push:
     branches:
       - main
-  # Also allows manual triggering from the Actions tab in GitHub
   workflow_dispatch:
-  # Optional: run on a schedule (e.g. every Sunday at midnight UTC)
-  # schedule:
-  #   - cron: '0 0 * * 0'
 
 jobs:
   generate-previews:
@@ -22,7 +17,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'   # v18+ required for native fetch
+          node-version: '20'
 
       - name: Install dependencies
         run: npm install
@@ -31,11 +26,3 @@ jobs:
         env:
           ORG_PAT_TOKEN: ${{ secrets.ORG_PAT_TOKEN }}
         run: node generate_preview_script.js
-
-      - name: Commit and push generated previews
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add previews/
-          git diff --staged --quiet || git commit -m "chore: update repository preview thumbnails [skip ci]"
-          git push
