@@ -487,37 +487,36 @@
             repos.forEach(repo => repoContainer.appendChild(createRepoCard(repo)));
         }
 
-        async function fetchAndDisplayRepos(username) {
-            displayStatus(`Connecting to GitHub...`, 'text-brand-teal');
-            try {
-                const [uResp, rResp] = await Promise.all([
-                    fetch(`https://api.github.com/users/${username}`),
-                    fetch(`https://api.github.com/users/${username}/repos?type=public&sort=pushed&per_page=100`)
-                ]);
-                if (uResp.status === 404) {
-                    displayStatus(`Error: User not found.`, 'text-red-500');
-                    return;
+async function fetchAndDisplayRepos(username) {
+    displayStatus(`Connecting to GitHub...`, 'text-brand-teal');
+    try {
+        const [uResp, rResp] = await Promise.all([
+            fetch(`https://api.github.com/users/${username}`),
+            fetch(`https://api.github.com/users/${username}/repos?type=public&sort=pushed&per_page=100`, {
+                headers: {
+                    'Accept': 'application/vnd.github.mercy-preview+json'
                 }
-                const userData = await uResp.json();
-                const repoData = await rResp.json();
-                currentRepos = repoData.filter(repo => 
-                    repo.name !== EXCLUDED_REPO_NAME && 
-                    repo.topics && 
-                    repo.topics.length > 0
-                );
-                displayProfile(userData);
-                if (currentRepos.length === 0) {
-                    displayStatus(`No qualifying repositories found.`, 'text-brand-slate');
-                } else {
-                    displayStatus(`${currentRepos.length} Repositories Available:`);
-                    renderTopics(currentRepos);
-                    renderRepoCards(currentRepos);
-                }
-            } catch (error) {
-                displayStatus(`Network connection failed.`, 'text-red-500');
-            }
+            })
+        ]);
+        if (uResp.status === 404) {
+            displayStatus(`Error: User not found.`, 'text-red-500');
+            return;
         }
-
+        const userData = await uResp.json();
+        const repoData = await rResp.json();
+        currentRepos = repoData.filter(repo => repo.name !== EXCLUDED_REPO_NAME);  // ← only excludes the catalog itself
+        displayProfile(userData);
+        if (currentRepos.length === 0) {
+            displayStatus(`No qualifying repositories found.`, 'text-brand-slate');
+        } else {
+            displayStatus(`${currentRepos.length} Repositories Available:`);
+            renderTopics(currentRepos);
+            renderRepoCards(currentRepos);
+        }
+    } catch (error) {
+        displayStatus(`Network connection failed.`, 'text-red-500');
+    }
+}
         function createRepoCard(repo) {
             const card = document.createElement('div');
             const repoIdStr = repo.id.toString();
